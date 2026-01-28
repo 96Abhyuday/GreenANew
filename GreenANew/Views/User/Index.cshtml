@@ -1,0 +1,99 @@
+﻿@model GreenANew.Models.CitizenDashVM
+@{
+    ViewBag.Title = "Citizen Dashboard";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Title -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Welcome, Citizen</h3>
+        <p class="text-muted">Let’s make your city cleaner & greener </p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Issues</h6>
+                    <h2 class="fw-bold text-success">@Model.TotalIssues</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">Pending Issues</h6>
+                    <h2 class="fw-bold text-warning">@Model.PendingIssues</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">Resolved</h6>
+                    <h2 class="fw-bold text-primary">@Model.ResolvedIssues</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">Events Joined</h6>
+                    <h2 class="fw-bold text-success">@Model.EventsJoined</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="row mt-5 g-4">
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Report New Issue</h5>
+                    <p class="card-text text-muted">
+                        Report garbage, sanitation or plantation related issues.
+                    </p>
+                    <a href="/User/Report" class="btn btn-success">Report Issue</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">My Issues</h5>
+                    <p class="card-text text-muted">
+                        Track status of your reported issues.
+                    </p>
+                    <a href="/User/Issues" class="btn btn-primary">View Issues</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Plantation Events</h5>
+                    <p class="card-text text-muted">
+                        Join upcoming tree plantation drives.
+                    </p>
+                    <a href="/User/PlantationEvent" class="btn btn-outline-success">View Events</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

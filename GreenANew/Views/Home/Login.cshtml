@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm p-4" style="width: 350px;">
+        <h3 class="fw-bold text-center mb-3">Login</h3>
+        <h5 class="mb-3" style="font-weight:bold;color:red;text-align:center;">@TempData["Error"]</h5>
+        <h5 class="mb-3 text-success" style="font-weight:bold;text-align:center;">@TempData["Problem"]</h5>
+        <form action="/Home/Login" method="post">
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="Email" required />
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="Password" required />
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+                <label class="form-label">Login As</label>
+                <select class="form-select" name="Role" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="Citizen">Citizen</option>
+                    <option value="Worker">Worker / NGO</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Login</button>
+            </div>
+
+            <p class="text-center mt-3">
+                Don't have an account? <a href="/Home/Registration">Register</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+
+

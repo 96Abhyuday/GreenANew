@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Report Issue";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+<div class="container">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Report New Issue</h3>
+        <p class="text-muted">Help us keep the city clean & green 🌱</p>
+    </div>
+
+    <!-- Report Issue Form -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form action="/User/Report" method="post" enctype="multipart/form-data">
+
+                <!-- Issue Type -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Issue Type</label>
+                    <select class="form-select" name="IssueType" required>
+                        <option value="">-- Select Issue Type --</option>
+                        <option value="Garbage">Garbage / Waste</option>
+                        <option value="Plantation">Plantation Required</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Location</label>
+                    <input type="text" name="Location" class="form-control"
+                           placeholder="Enter area / landmark" required />
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Discription</label>
+                    <textarea name="Discription" rows="4" class="form-control"
+                              placeholder="Describe the issue briefly..." required></textarea>
+                </div>
+
+                <!-- Image Upload -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Upload Image (optional)</label>
+                    <input type="file" name="Image" class="form-control" />
+                </div>
+
+                <!-- Submit -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success px-4">
+                        Submit Issue
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+

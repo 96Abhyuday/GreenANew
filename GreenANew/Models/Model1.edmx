@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GreenANewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EventParticipants">
+          <Key>
+            <PropertyRef Name="ParticipantId" />
+          </Key>
+          <Property Name="ParticipantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="JoinedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Issues">
+          <Key>
+            <PropertyRef Name="IssueId" />
+          </Key>
+          <Property Name="IssueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IssueType" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlantationEvents">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssueId" Type="int" Nullable="false" />
+          <Property Name="AssignedTo" Type="int" Nullable="false" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompletedAt" Type="datetime" />
+          <Property Name="CompletionImage" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__EventPart__Event__619B8048">
+          <End Role="PlantationEvents" Type="Self.PlantationEvents" Multiplicity="1" />
+          <End Role="EventParticipants" Type="Self.EventParticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantationEvents">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventParticipants">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventPart__UserI__628FA481">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="EventParticipants" Type="Self.EventParticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventParticipants">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Issues__UserId__5070F446">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Issues" Type="Self.Issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Issues">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plantatio__Creat__5CD6CB2B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="PlantationEvents" Type="Self.PlantationEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlantationEvents">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tasks__AssignedT__5812160E">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tasks__IssueId__571DF1D5">
+          <End Role="Issues" Type="Self.Issues" Multiplicity="1" />
+          <End Role="tasks" Type="Self.tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Issues">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="IssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GreenANewModelStoreContainer">
+          <EntitySet Name="EventParticipants" EntityType="Self.EventParticipants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Issues" EntityType="Self.Issues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlantationEvents" EntityType="Self.PlantationEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tasks" EntityType="Self.tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EventPart__Event__619B8048" Association="Self.FK__EventPart__Event__619B8048">
+            <End Role="PlantationEvents" EntitySet="PlantationEvents" />
+            <End Role="EventParticipants" EntitySet="EventParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventPart__UserI__628FA481" Association="Self.FK__EventPart__UserI__628FA481">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventParticipants" EntitySet="EventParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Issues__UserId__5070F446" Association="Self.FK__Issues__UserId__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plantatio__Creat__5CD6CB2B" Association="Self.FK__Plantatio__Creat__5CD6CB2B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PlantationEvents" EntitySet="PlantationEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tasks__AssignedT__5812160E" Association="Self.FK__tasks__AssignedT__5812160E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tasks__IssueId__571DF1D5" Association="Self.FK__tasks__IssueId__571DF1D5">
+            <End Role="Issues" EntitySet="Issues" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GreenANewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EventParticipant">
+          <Key>
+            <PropertyRef Name="ParticipantId" />
+          </Key>
+          <Property Name="ParticipantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="JoinedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PlantationEvent" Relationship="Self.FK__EventPart__Event__619B8048" FromRole="EventParticipants" ToRole="PlantationEvents" />
+          <NavigationProperty Name="User" Relationship="Self.FK__EventPart__UserI__628FA481" FromRole="EventParticipants" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="IssueId" />
+          </Key>
+          <Property Name="IssueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IssueType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Issues__UserId__5070F446" FromRole="Issues" ToRole="Users" />
+          <NavigationProperty Name="tasks" Relationship="Self.FK__tasks__IssueId__571DF1D5" FromRole="Issues" ToRole="tasks" />
+        </EntityType>
+        <EntityType Name="PlantationEvent">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EventParticipants" Relationship="Self.FK__EventPart__Event__619B8048" FromRole="PlantationEvents" ToRole="EventParticipants" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Plantatio__Creat__5CD6CB2B" FromRole="PlantationEvents" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IssueId" Type="Int32" Nullable="false" />
+          <Property Name="AssignedTo" Type="Int32" Nullable="false" />
+          <Property Name="TaskType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompletedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Issue" Relationship="Self.FK__tasks__IssueId__571DF1D5" FromRole="tasks" ToRole="Issues" />
+          <NavigationProperty Name="User" Relationship="Self.FK__tasks__AssignedT__5812160E" FromRole="tasks" ToRole="Users" />
+          <Property Name="CompletionImage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EventParticipants" Relationship="Self.FK__EventPart__UserI__628FA481" FromRole="Users" ToRole="EventParticipants" />
+          <NavigationProperty Name="Issues" Relationship="Self.FK__Issues__UserId__5070F446" FromRole="Users" ToRole="Issues" />
+          <NavigationProperty Name="PlantationEvents" Relationship="Self.FK__Plantatio__Creat__5CD6CB2B" FromRole="Users" ToRole="PlantationEvents" />
+          <NavigationProperty Name="tasks" Relationship="Self.FK__tasks__AssignedT__5812160E" FromRole="Users" ToRole="tasks" />
+        </EntityType>
+        <Association Name="FK__EventPart__Event__619B8048">
+          <End Role="PlantationEvents" Type="Self.PlantationEvent" Multiplicity="1" />
+          <End Role="EventParticipants" Type="Self.EventParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlantationEvents">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventParticipants">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EventPart__UserI__628FA481">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="EventParticipants" Type="Self.EventParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventParticipants">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Issues__UserId__5070F446">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Issues" Type="Self.Issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Issues">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tasks__IssueId__571DF1D5">
+          <End Role="Issues" Type="Self.Issue" Multiplicity="1" />
+          <End Role="tasks" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Issues">
+              <PropertyRef Name="IssueId" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="IssueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plantatio__Creat__5CD6CB2B">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="PlantationEvents" Type="Self.PlantationEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PlantationEvents">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tasks__AssignedT__5812160E">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="tasks" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tasks">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GreenANewEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EventParticipants" EntityType="Self.EventParticipant" />
+          <EntitySet Name="Issues" EntityType="Self.Issue" />
+          <EntitySet Name="PlantationEvents" EntityType="Self.PlantationEvent" />
+          <EntitySet Name="tasks" EntityType="Self.task" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__EventPart__Event__619B8048" Association="Self.FK__EventPart__Event__619B8048">
+            <End Role="PlantationEvents" EntitySet="PlantationEvents" />
+            <End Role="EventParticipants" EntitySet="EventParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EventPart__UserI__628FA481" Association="Self.FK__EventPart__UserI__628FA481">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventParticipants" EntitySet="EventParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Issues__UserId__5070F446" Association="Self.FK__Issues__UserId__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Issues" EntitySet="Issues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tasks__IssueId__571DF1D5" Association="Self.FK__tasks__IssueId__571DF1D5">
+            <End Role="Issues" EntitySet="Issues" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plantatio__Creat__5CD6CB2B" Association="Self.FK__Plantatio__Creat__5CD6CB2B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PlantationEvents" EntitySet="PlantationEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tasks__AssignedT__5812160E" Association="Self.FK__tasks__AssignedT__5812160E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GreenANewModelStoreContainer" CdmEntityContainer="GreenANewEntities">
+          <EntitySetMapping Name="EventParticipants">
+            <EntityTypeMapping TypeName="GreenANewModel.EventParticipant">
+              <MappingFragment StoreEntitySet="EventParticipants">
+                <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="JoinedAt" ColumnName="JoinedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Issues">
+            <EntityTypeMapping TypeName="GreenANewModel.Issue">
+              <MappingFragment StoreEntitySet="Issues">
+                <ScalarProperty Name="IssueId" ColumnName="IssueId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IssueType" ColumnName="IssueType" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantationEvents">
+            <EntityTypeMapping TypeName="GreenANewModel.PlantationEvent">
+              <MappingFragment StoreEntitySet="PlantationEvents">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tasks">
+            <EntityTypeMapping TypeName="GreenANewModel.task">
+              <MappingFragment StoreEntitySet="tasks">
+                <ScalarProperty Name="CompletionImage" ColumnName="CompletionImage" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="IssueId" ColumnName="IssueId" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GreenANewModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

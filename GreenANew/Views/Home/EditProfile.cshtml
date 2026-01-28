@@ -1,0 +1,88 @@
+﻿@model GreenANew.Models.User
+@{
+    ViewBag.Title = "My Profile";
+    if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Worker")
+    {
+        Layout = "~/Views/Shared/NGOLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/CommonLayout.cshtml";
+    }
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">My Profile</h5>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm("EditProfile", "Home", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.UserId)
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="Name" value="@Model.Name" />
+                        </div>
+
+                        <!-- Email (Readonly) -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="Email" value="@Model.Email" />
+                        </div>
+
+                        <!-- Role -->
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <input type="text"
+                                   class="form-control"
+                                   value="@Model.Role"
+                                   readonly />
+                        </div>
+
+                        <!-- Change Password -->
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input type="password"
+                                   name="Password"
+                                   class="form-control"
+                                   value="@Model.Password" />
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success">
+                                Update Profile
+                            </button>
+                            @if (@Model.Role == "Worker")
+                            {
+                                <a href="/NGO/Index" class="btn btn-secondary">
+                                    Cancel
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/User/Index" class="btn btn-secondary">
+                                    Cancel
+                                </a>
+                            }
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

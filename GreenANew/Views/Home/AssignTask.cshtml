@@ -1,0 +1,42 @@
+﻿@model GreenANew.Models.task
+
+@{
+    ViewBag.Title = "Assign Task";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AssignTask", "Home", FormMethod.Post))
+{
+    <input type="hidden" name="IssueId" value="@ViewBag.IssueId" />
+    <h5 class="text-center fw-bold text-danger">@TempData["Error"]</h5>
+    <div class="mb-3">
+        <label class="form-label fw-bold">Assign To (Worker / NGO)</label>
+        <select name="AssignedTo" class="form-select" required>
+            <option value="">-- Select Worker --</option>
+            @foreach (var w in ViewBag.Workers)
+            {
+                <option value="@w.UserId">@w.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Task Type</label>
+        <select name="TaskType" class="form-select" required>
+            <option value="">-- Select Type --</option>
+            <option value="Plantation">Plantation</option>
+            <option value="Cleaning">Cleaning</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Deadline</label>
+        <input type="date"
+               name="Deadline"
+               class="form-control"
+               required />
+    </div>
+
+    <button class="btn btn-success" type="submit">Assign Task</button>
+}
+

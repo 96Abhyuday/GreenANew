@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Issue Management";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@model List<GreenANew.Models.Issue>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Issue Management</h3>
+        <h5 class="fw-bold text-center text-danger">@TempData["Error"]</h5>
+        <h5 class="fw-bold text-center text-success">@TempData["Success"]</h5>
+        <p class="text-muted">Review citizen reported issues</p>
+    </div>
+
+    <!-- Issues Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Citizen</th>
+                            <th>Issue Type</th>
+                            <th>Location</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Sample Row -->
+                        @{
+                            int a = 1;
+                        }
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@a</td>
+                                <td>@m.User.Name</td>
+                                <td>@m.IssueType</td>
+                                <td>@m.Location</td>
+                                <td>
+                                    <img src="~/Content/IssueImg/@m.Image"
+                                         class="img-fluid rounded h-25"
+                                         alt="Issue Image" />
+                                </td>
+                                @if (@m.Status == "Completed")
+                                {
+                                    <td>
+                                        <span class="badge bg-success text-white">@m.Status</span>
+                                    </td>
+                                }
+                                else if (@m.Status == "Rejected")
+                                {
+                                    <td>
+                                        <span class="badge bg-danger text-white">@m.Status</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="badge bg-warning text-dark">@m.Status</span>
+                                    </td>
+                                }
+                            <td>
+
+
+                                @if (m.Status != "Rejected")
+                                {
+                                    <a href="/Home/AssignTask?issueId=@m.IssueId"
+                                       class="btn btn-sm btn-primary mb-2">
+                                        Assign Task
+                                    </a>
+                                    <a href="/Admin/RejectIssue?issueId=@m.IssueId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to reject this issue?');">
+                                        Reject
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/Admin/ReopenIssue?issueId=@m.IssueId"
+                                       class="btn btn-sm btn-success"
+                                       onclick="return confirm('Reopen this issue?');">
+                                        Reopen
+                                    </a>
+                                }
+                            </td>
+                            </tr>
+                            a++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

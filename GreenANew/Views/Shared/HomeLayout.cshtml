@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - GreenANew</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Optional custom css -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            min-height: 100vh;
+        }
+
+        .auth-card {
+            border-radius: 12px;
+        }
+
+        .brand {
+            font-weight: bold;
+            font-size: 24px;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">🌱 GreenANew</a>
+        </div>
+    </nav>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow auth-card p-3 m-5" style="width: 420px;">
+
+
+            <!-- Brand -->
+            <div class="text-center mb-1">
+                <div class="brand">🌱 GreenANew</div>
+                <small class="text-muted">Clean • Green • Sustainable</small>
+            </div>
+
+            <!-- Page Content -->
+            @RenderBody()
+
+        </div>
+    </div>
+    <footer class="bg-success text-white text-center py-2">
+        © 2026 GreenANew | Make Your City Clean & Green
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

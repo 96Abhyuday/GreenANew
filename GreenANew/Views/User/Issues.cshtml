@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "My Issues";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+@model List<GreenANew.Models.Issue>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">My Reported Issues</h3>
+        <p class="text-muted">Track status of issues reported by you</p>
+    </div>
+
+    <!-- Issues Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Issue Type</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Reported On</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Sample Row -->
+                        @{
+                            int a = 1;
+                        }
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@a</td>
+                                <td>@m.IssueType</td>
+                                <td>@m.Location</td>
+                                @if (@m.Status == "Completed")
+                                {
+                                    <td>
+                                        <span class="badge bg-success text-white">@m.Status</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="badge bg-warning text-dark">@m.Status</span>
+                                    </td>
+                                }
+                                <td>@m.CreatedAt</td>
+                                <td>
+                                    <a href="/User/IssueDetails?Id=@m.IssueId" class="btn btn-sm btn-primary">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                            a++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

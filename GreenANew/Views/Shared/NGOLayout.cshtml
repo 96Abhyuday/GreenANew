@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - Worker | GreenANew</title>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-dark bg-success">
+        <div class="container-fluid">
+
+            <!-- Offcanvas Toggle -->
+            <button class="btn btn-outline-light me-2"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#ngoSidebar">
+                ☰
+            </button>
+
+            <a class="navbar-brand fw-bold" href="#">🌱 GreenANew - NGO Panel</a>
+
+            <div class="text-white d-flex align-items-center">
+                NGO - Member
+                <a class="btn btn-outline-light btn-sm ms-2" href="/Home/Logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-start bg-dark text-white"
+         tabindex="-1"
+         id="ngoSidebar">
+
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">NGO Menu</h5>
+            <button type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body p-0">
+            <ul class="nav flex-column admin-menu">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/NGO/Index">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/NGO/AssignedTasks">My Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/User/MyProfile">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="p-4 bg-light">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-success text-white text-center py-2 fixed-bottom">
+        NGO - Members Panel © 2026 GreenANew
+    </footer>
+
+    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

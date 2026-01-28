@@ -1,0 +1,43 @@
+﻿@model GreenANew.Models.PlantationEvent
+@{
+    ViewBag.Title = "Create Event";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h3 class="fw-bold mb-4">Create Event </h3>
+    <h5 class="mb-3 text-danger text-center fw-bold">@TempData["Error"]</h5>
+    <h5 class="mb-3 text-success text-center fw-bold">@TempData["Success"]</h5>
+    <div class="card shadow-sm p-4" style="max-width:500px;">
+
+        @using (Html.BeginForm("CreateEvent", "Admin", FormMethod.Post))
+        {
+            <div class="mb-3">
+                <label class="form-label">Event Name</label>
+                <input type="text" class="form-control" name="Title" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="Location" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Event Date</label>
+                <input type="date" class="form-control" name="EventDate" />
+            </div>
+
+            <button class="btn btn-success">Create</button>
+        }
+    </div>
+
+</div>
+
+
+
+

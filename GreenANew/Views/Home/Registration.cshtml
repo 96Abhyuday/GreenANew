@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm p-4" style="width: 400px;">
+        <h3 class="fw-bold text-center mb-3">Registration</h3>
+        <h5 class="mb-3" style="font-weight:bold;color:red;text-align:center;">@TempData["Email"]</h5>
+        <h5 class="mb-3" style="font-weight:bold;color:red;text-align:center;">@TempData["Error"]</h5>
+
+        <form action="/Home/Registration" method="post">
+
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="Email" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" name="Password" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select class="form-select" name="Role" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="Citizen">Citizen</option>
+                    <option value="Worker">Worker / NGO</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <textarea class="form-control" name="Address" required> </textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">City</label>
+                <input type="text" class="form-control" name="City" required />
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Register</button>
+            </div>
+
+            <p class="text-center mt-3">
+                Already have an account? <a href="/Home/Login">Login</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+
+

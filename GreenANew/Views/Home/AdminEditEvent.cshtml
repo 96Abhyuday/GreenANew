@@ -1,0 +1,37 @@
+﻿@model GreenANew.Models.PlantationEvent
+@{
+    ViewBag.Title = "Edit Event Date";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h3 class="fw-bold mb-4">Edit Event Date</h3>
+@using (Html.BeginForm("AdminEditEvent", "Home", FormMethod.Post))
+{
+    <div class="card shadow-sm p-4" style="max-width:500px;">
+
+        <div class="mb-3">
+            <input type="hidden" class="form-control" name="EventId" value="@Model.EventId" />
+
+            <label class="form-label">Event Name</label>
+            <input class="form-control" value="@Model.Title" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input class="form-control" value="@Model.Location" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Event Date</label>
+            <input type="date" class="form-control" name="EventDate" value="@Model.EventDate"/>
+        </div>
+
+        <button class="btn btn-success">Update Date</button>
+
+    </div>
+}
+</div>
+
+

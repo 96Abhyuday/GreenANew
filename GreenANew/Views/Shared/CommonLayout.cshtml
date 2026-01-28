@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-success">
+        <div class="container-fluid">
+
+            <!-- Offcanvas Toggle Button -->
+            <button class="btn btn-outline-light me-2"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#userSidebar">
+                ☰
+            </button>
+
+            <a class="navbar-brand fw-bold" href="#">🌱 GreenANew</a>
+
+            <a class="btn btn-outline-light btn-sm" href="/Home/Logout">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-start bg-dark text-white"
+         tabindex="-1"
+         id="userSidebar">
+
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">User Menu</h5>
+            <button type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body p-0">
+            <ul class="nav flex-column sidebar-menu">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/User/Index">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/User/Issues">Issues</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/User/PlantationEvents">Plantation Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/User/Report">Report Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/User/MyProfile">Profile</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="p-4">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-success text-white text-center py-2">
+        © 2026 GreenANew | Make Your City Clean & Green
+    </footer>
+
+    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

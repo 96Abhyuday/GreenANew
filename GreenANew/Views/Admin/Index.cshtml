@@ -1,0 +1,105 @@
+﻿@model GreenANew.Models.NGODash
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Admin Dashboard</h3>
+        <p class="text-muted">System overview & quick actions</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Users</h6>
+                    <h2 class="fw-bold text-primary">@Model.UserCount</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Pending Issues</h6>
+                    <h2 class="fw-bold text-warning">@Model.AssignedTo</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Active Tasks</h6>
+                    <h2 class="fw-bold text-info">@Model.InProgress</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Completed Works</h6>
+                    <h2 class="fw-bold text-success">@Model.Completed</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Action Cards -->
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold">Manage Issues</h5>
+                    <p class="text-muted">
+                        Verify reported issues and assign tasks.
+                    </p>
+                    <a href="/Admin/IssueManagement" class="btn btn-warning btn-sm">
+                        View Issues
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold">Manage Tasks</h5>
+                    <p class="text-muted">
+                        Track tasks assigned to workers & NGOs.
+                    </p>
+                    <a href="/Admin/TaskManagement" class="btn btn-info btn-sm text-white">
+                        View Tasks
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold">Manage Events</h5>
+                    <p class="text-muted">
+                        Create and monitor plantation events.
+                    </p>
+                    <a href="/Admin/EventManagement" class="btn btn-success btn-sm">
+                        View Events
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

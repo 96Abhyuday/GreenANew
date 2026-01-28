@@ -1,0 +1,75 @@
+﻿@model GreenANew.Models.Issue
+@{
+    ViewBag.Title = "Issue Details";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+
+<div class="container">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Issue Details</h3>
+        <p class="text-muted">Complete information about your reported issue</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Issue Info -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Issue Information</h5>
+                    <input type="hidden" name="IssueId" value="@Model.IssueId" />
+                    <p><strong>Issue Type:</strong> @Model.IssueType</p>
+                    <p><strong>Location:</strong> @Model.Location</p>
+                    <p>
+                        <strong>Description:</strong><br />
+                        @Model.Discription
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="badge bg-warning text-dark">@Model.Status</span>
+                    </p>
+
+                    <p><strong>Reported On:</strong>@Model.CreatedAt</p>
+
+                </div>
+            </div>
+        </div>
+
+        @{
+            var completedTask = Model.tasks.FirstOrDefault(t => t.Status == "Completed");
+        }
+
+        @if (completedTask != null)
+        {
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-3">Uploaded Image</h6>
+
+                        <img src="~/Content/TaskImages/@completedTask.CompletionImage"
+                             class="img-fluid rounded"
+                             alt="Task Image" />
+                        <input type="text" class="form-control mt-2"  value="@completedTask.CompletedAt.Value.ToString("dd MMM yyyy")" readonly/>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+    <!-- Back Button -->
+    <div class="mt-4">
+        <a href="/User/Issues" class="btn btn-secondary">
+            ← Back to My Issues
+        </a>
+    </div>
+
+</div>
+
+
+

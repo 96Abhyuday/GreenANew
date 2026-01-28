@@ -1,0 +1,67 @@
+﻿@model GreenANew.Models.NGODash
+@{
+    ViewBag.Title = "NGO Dashboard";
+    Layout = "~/Views/Shared/NGOLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Welcome!</h3>
+        <p class="text-muted">Here are your assigned tasks</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">Assigned Tasks</h6>
+                    <h2 class="fw-bold text-primary">@Model.AssignedTo</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">In Progress</h6>
+                    <h2 class="fw-bold text-warning">@Model.InProgress</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h6 class="text-muted">Completed</h6>
+                    <h2 class="fw-bold text-success">@Model.Completed</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row g-4">
+
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">My Assigned Tasks</h5>
+                    <p class="text-muted">
+                        View and manage tasks assigned by admin.
+                    </p>
+                    <a href="/NGO/AssignedTasks" class="btn btn-primary">
+                        View Tasks
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

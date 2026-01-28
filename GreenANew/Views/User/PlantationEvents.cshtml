@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Plantation Events";
+    Layout = "~/Views/Shared/CommonLayout.cshtml";
+}
+@model List<GreenANew.Models.PlantationEvent>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Plantation Events</h3>
+        <p class="text-muted">Join hands to make the city greener</p>
+    </div>
+
+    <!-- Events List -->
+    <div class="row g-4">
+        @{
+            int a = 1;
+        }
+
+        @foreach (var m in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">@m.Title</h5>
+                        <p class="text-muted mb-2">
+                            <strong>Location:</strong>@m.Location<br />
+                            <strong>Date:</strong> @m.EventDate.ToString("dd MMM yyyy")
+                        </p>
+                        <p class="card-text">
+                            @m.Description
+                        </p>
+
+                        <a href="/Home/Join?id=@m.EventId" class="btn btn-outline-success btn-sm">
+                            Join Event
+                        </a>
+                    </div>
+                </div>
+            </div>
+            a++;
+        }
+    </div>
+
+</div>
+
+

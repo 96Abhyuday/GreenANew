@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Manage Tasks";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@model List<GreenANew.Models.task>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Task Management</h3>
+        <p class="text-muted">Track and manage tasks assigned to workers / NGOs</p>
+    </div>
+
+    <!-- Tasks Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Sr.No.</th>
+                            <th>Task Type</th>
+                            <th>Location</th>
+                            <th>Assigned To</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Sample Row -->
+                        @{
+                            int a = 1;
+
+
+                        }
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@a</td>
+                                <td>@m.TaskType</td>
+                                <td>@m.Issue.Location</td>
+                                <td>@m.User.Name</td>
+                                <td>@m.Deadline.ToString("dd MMM yyyy")</td>
+                                @if (@m.Status == "Completed")
+                                {
+                                    <td>
+                                        <span class="badge bg-success text-white">@m.Status</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="badge bg-warning text-dark">@m.Status</span>
+                                    </td>
+                                }
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-success">
+                                        Mark Completed
+                                    </a>
+                                </td>
+                            </tr>
+                            a++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

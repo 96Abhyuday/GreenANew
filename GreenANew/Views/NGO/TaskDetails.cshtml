@@ -1,0 +1,80 @@
+﻿@model GreenANew.Models.task
+@{
+    ViewBag.Title = "Task Details";
+    Layout = "~/Views/Shared/NGOLayout.cshtml";
+}
+
+<div class="container">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">Task Details</h3>
+        <p class="text-muted">Complete information about the assigned task</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Task Info -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5>@TempData["Success"]</h5>
+                    <h5 class="fw-bold mb-3">Task Information</h5>
+                    <p><strong>Task Type:</strong> @Model.TaskType</p>
+                    <p><strong>Location:</strong> @Model.Issue.Location</p>
+                    <p><strong>Deadline:</strong> @Model.Deadline.ToString("dd MMM yyyy")</p>
+
+                    <p>
+                        <strong>Description:</strong><br />
+                        @Model.Issue.Discription
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        @if (@Model.Status == "Completed")
+                        {
+                             <span class="badge bg-success text-white">@Model.Status</span>
+                        }
+                        else
+                        {
+                             <span class="badge bg-warning text-dark">@Model.Status</span>
+                        }
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        @if (Model.Status == "InProgress")
+        {
+            <!-- Completion Proof -->
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <h6 class="fw-bold mb-3">Upload Completion Proof</h6>
+
+                        <form action="/NGO/TaskDetails" method="post" enctype="multipart/form-data">
+                            <div class="mb-2">
+                                <input type="hidden" class="form-control" name="TaskId" value="@Model.TaskId" />
+                                <input type="file" class="form-control" name="CompletionImage" />
+                            </div>
+                            <div class="mb-3">
+                                <input type="date" class="form-control" name="ComplitionDate" value="@Model.CompletedAt" />
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-sm">
+                                Mark as Completed
+                            </button>
+                        </form>
+                       
+
+
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+
+    <!-- Back -->
+</div>
+

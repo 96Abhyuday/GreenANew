@@ -1,0 +1,41 @@
+﻿@model GreenANew.Models.User
+@{
+    ViewBag.Title = "Edit User Role";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h3 class="fw-bold mb-4">Edit User Role</h3>
+    <h5 class="mb-3 text-danger text-center fw-bold">@TempData["Error"]</h5>
+    <h5 class="mb-3 text-danger text-center fw-bold">@TempData["Problem"]</h5>
+
+<div class="card shadow-sm p-4" style="max-width:500px;">
+        @using (Html.BeginForm("AdminEditUserRole", "Home", FormMethod.Post))
+        {
+            <div class="mb-3">
+                <label>Name</label>
+                <input type="hidden" class="form-control" name="UserId" value="@Model.UserId" />
+                <input class="form-control" value="@Model.Name" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input class="form-control" value="@Model.Email" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label>Role</label>
+                <select class="form-select" name="Role">
+                    <option value="Citizen"  @(Model.Role == "Citizen" ? "selected" : "")>Citizen</option>
+                    <option value="Worker" @(Model.Role == "Worker" ? "Selected" : "")>Worker</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary">Update Role</button>
+        }
+    </div>
+
+</div>
+
+

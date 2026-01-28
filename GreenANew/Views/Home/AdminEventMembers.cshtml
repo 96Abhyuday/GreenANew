@@ -1,0 +1,55 @@
+﻿@model GreenANew.Models.EventMembersVM
+@{
+    ViewBag.Title = "Event Members";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <h3 class="fw-bold mb-3">Event Participants</h3>
+
+    <!-- Event Info -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <strong>Event:</strong> @Model.Event.Title<br />
+            <strong>Location:</strong> @Model.Event.Location <br />
+            <strong>Date:</strong> @Model.Event.EventDate.ToString("dd MMM yyyy")
+        </div>
+    </div>
+
+    <!-- Members Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="table-success">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Joined On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int a = 1;
+                    }
+                    @foreach (var m in Model.Participants)
+                    {
+                        <tr>
+                            <td>@a</td>
+                            <td>@m.User.Name</td>
+                            <td>@m.User.Email</td>
+                            <td>@m.JoinedAt.ToString("dd MMM yyyy")</td>
+                        </tr>
+                        a++;
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+

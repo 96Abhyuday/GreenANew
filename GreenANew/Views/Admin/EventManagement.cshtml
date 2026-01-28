@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Manage Events";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@model List<GreenANew.Models.PlantationEvent>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+        <div>
+            <h3 class="fw-bold">Event Management</h3>
+            <p class="text-muted">Create and monitor plantation events</p>
+        </div>
+        <a href="/Admin/CreateEvent" class="btn btn-success btn-sm">+ Create Event</a>
+    </div>
+
+    <!-- Events Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Event Name</th>
+                            <th>Location</th>
+                            <th>Event Date</th>
+                            <th>Participants</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Sample Row -->
+                        @{
+                            int a = 1;
+                        }
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@a</td>
+                                <td>@m.Title</td>
+                                <td>@m.Location</td>
+                                <td>@m.EventDate.ToString("dd MMM yyyy")</td>
+                                <td>@(m.EventParticipants != null ? m.EventParticipants.Count : 0)</td>
+                                <td>
+                                    <a href="/Home/AdminEventMembers?Id=@m.EventId" class="btn btn-sm btn-primary">View</a>
+                                    <a href="/Home/AdminEditEvent?id=@m.EventId" class="btn btn-sm btn-warning">Edit</a>
+                                </td>
+                            </tr>
+                            a++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9121f043ddc1405e8f0fdc8af5a49cfb" Name="Diagram1">
+        <EntityTypeShape EntityType="GreenANewModel.EventParticipant" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenANewModel.Issue" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenANewModel.PlantationEvent" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenANewModel.task" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenANewModel.User" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="GreenANewModel.FK__EventPart__Event__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenANewModel.FK__EventPart__UserI__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenANewModel.FK__Issues__UserId__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenANewModel.FK__tasks__IssueId__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenANewModel.FK__Plantatio__Creat__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenANewModel.FK__tasks__AssignedT__5812160E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

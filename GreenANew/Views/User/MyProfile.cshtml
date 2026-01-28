@@ -1,0 +1,63 @@
+﻿@model GreenANew.Models.User
+@{
+    ViewBag.Title = "My Profile";
+    if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Worker")
+    {
+        Layout = "~/Views/Shared/NGOLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/CommonLayout.cshtml";
+    }
+}
+
+<div class="container">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">My Profile</h3>
+        <p class="text-muted">View and update your profile information</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Profile Info -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Personal Details</h5>
+
+                    <p><strong>Name:</strong> @Model.Name</p>
+                    <p><strong>Email:</strong> @Model.Email</p>
+                    <p><strong>Address:</strong> @Model.Address</p>
+                    <p><strong>City:</strong> @Model.City</p>
+
+                    <a href="/Home/EditProfile" class="btn btn-primary btn-sm">
+                        Edit Profile
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        @if(Model.Role == "Citizen")
+            {
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+
+                            <h5 class="fw-bold mb-3">My Contributions</h5>
+
+                            <p>Issues Reported: <strong>5</strong></p>
+                            <p>Events Joined: <strong>2</strong></p>
+                            <p>Issues Resolved: <strong>3</strong></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        
+    </div>
+</div>
+
+

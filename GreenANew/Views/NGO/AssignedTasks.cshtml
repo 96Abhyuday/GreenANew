@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Assigned Tasks";
+    Layout = "~/Views/Shared/NGOLayout.cshtml";
+}
+@model List<GreenANew.Models.task>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h3 class="fw-bold">My Assigned Tasks</h3>
+        <p class="text-muted">Complete tasks assigned by admin</p>
+    </div>
+
+    <!-- Tasks Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Task Type</th>
+                            <th>Location</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Sample Row -->
+                        @{
+                            int a = 1;
+                        }
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@a</td>
+                                <td>@m.TaskType</td>
+                                <td>@m.Issue.Location</td>
+                                <td>@m.Deadline.ToString("dd MMM yyyy")</td>
+                                @if (@m.Status == "Completed")
+                                {
+                                    <td>
+                                        <span class="badge bg-success text-white">@m.Status</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="badge bg-warning text-dark">@m.Status</span>
+                                    </td>
+                                }
+                            <td>
+                                @if (@m.Status == "Assigned")
+                                {
+                                    <a href="/NGO/TaskDetails?Id=@m.TaskId" class="btn btn-sm btn-success">
+                                        Start 
+                                    </a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-sm btn-secondary" disabled>
+                                        Done
+                                    </button>
+                                }
+                                <a href="/NGO/TaskDetails?Id=@m.TaskId" class="btn btn-sm btn-success">
+                                    View
+                                </a>
+                            </td>
+                                </tr>
+                            a++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
