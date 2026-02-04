@@ -45,31 +45,27 @@
                                 <td>@m.Email</td>
                                 <td>@m.Role</td>
                                 @if (@m.IsActive == true)
-{
-    <td>
-        <span class="badge bg-success">Active</span>
-    </td>
-    <td>
-        <a href="/Home/AdminEditUserRole?Id=@m.UserId" class="btn btn-sm btn-warning">Edit Role</a>
-        <a href="/Admin/BlockUser?Id=@m.UserId"
-           class="btn btn-sm btn-danger"
-           onclick="return confirm('Are you sure you want to block this user?');">
-            Block
-        </a>
-    </td>
-}
-else
-{
-    <td>
-        <span class="badge bg-danger">Blocked</span>
-    </td>
-    <td>
-        <a href="/Admin/UnblockUser?Id=@m.UserId"
-           class="btn btn-sm btn-success"
-           onclick="return confirm('Unblock this user?');">
-            Unblock
-        </a>
-    </td>
+                                {
+                                    <td>
+                                            <span class="badge bg-success">Active</span>
+                                    </td>
+                                    <td>
+                                            <a href="/Home/AdminEditUserRole?Id=@m.UserId" class="btn btn-sm btn-warning">Edit Role</a>
+                                            <a href="/Admin/BlockUser?Id=@m.UserId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to block this user?');">
+                                                Block
+                                            </a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                            <span class="badge bg-danger">Blocked</span>
+                                    </td>
+                                    <td>
+                                            <a href="/Admin/UnblockUser?Id=@m.UserId" class="btn btn-sm btn-success" onclick="return confirm('Unblock this user?');">
+                                                Unblock
+                                            </a>
+                                    </td>
                             </tr>
                             a++;
                         }
