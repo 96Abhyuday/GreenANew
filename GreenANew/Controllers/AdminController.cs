@@ -148,5 +148,28 @@ namespace GreenANew.Controllers
             var user = db.Users.ToList();
             return View(user);
         }
+        public ActionResult BlockUser(int Id)
+        {
+            var user = db.Users.FirstOrDefault(x => x.UserId == Id);
+            if (user != null)
+                {
+                    user.IsActive = false;
+                    db.SaveChanges();
+                }
+            return RedirectToAction("UserManagement");
+        }
+
+        // UNBLOCK USER
+        
+        public ActionResult UnblockUser(int Id)
+        {
+            var user = db.Users.FirstOrDefault(x => x.UserId == Id);
+            if (user != null)
+            {
+                user.IsActive = true;
+                db.SaveChanges();
+            }
+            return RedirectToAction("UserManagement");
+        }
     }
 }
